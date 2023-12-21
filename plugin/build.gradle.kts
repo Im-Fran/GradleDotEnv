@@ -1,9 +1,12 @@
 plugins {
     `java-gradle-plugin`
     alias(libs.plugins.jvm)
+
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 version = "1.0.0"
+group = "cl.franciscosolis"
 
 repositories {
     mavenLocal()
@@ -16,10 +19,16 @@ dependencies {
 }
 
 gradlePlugin {
-    // Define the plugin
+    website = "https://github.com/Im-Fran/GradleDotEnv"
+    vcsUrl = "https://github.com/Im-Fran/GradleDotEnv"
+
     val env by plugins.creating {
         id = "cl.franciscosolis.gradledotenv"
         implementationClass = "cl.franciscosolis.gradledotenv.GradleDotEnvPlugin"
+        displayName = "GradleDotEnv"
+        description = "Gradle plugin to load environment variables from .env files"
+        version = "1.0.0"
+        tags = listOf("env", "dotenv", "envfile", "environment", "variables", "gradle", "plugin")
     }
 }
 
