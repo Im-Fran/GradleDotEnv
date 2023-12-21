@@ -28,7 +28,7 @@ gradlePlugin {
         displayName = "GradleDotEnv"
         description = "Gradle plugin to load environment variables from .env files"
         version = "1.0.0"
-        tags = listOf("env", "dotenv", "envfile", "environment", "variables", "gradle", "plugin")
+        tags = listOf("env", "dotenv", "envfile", "environment", "variables")
     }
 }
 
