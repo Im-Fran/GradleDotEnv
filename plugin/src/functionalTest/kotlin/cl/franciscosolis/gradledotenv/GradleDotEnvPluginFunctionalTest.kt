@@ -17,10 +17,16 @@ class GradleDotEnvPluginFunctionalTest {
 
     private val buildFile by lazy { projectDir.resolve("build.gradle") }
     private val settingsFile by lazy { projectDir.resolve("settings.gradle") }
+    private val envFile by lazy { projectDir.resolve(".env") }
 
     @Test
     fun hasEnvExtension() {
+        val envs = mapOf("FOO" to "BAR", "UUID" to UUID.randomUUID().toString())
         // Set up the test build
+        envFile.writeText("""
+            FOO=${envs["FOO"]}
+            UUID=${envs["UUID"]}
+        """.trimIndent())
         settingsFile.writeText("")
         buildFile.writeText("""
             plugins {
@@ -30,8 +36,6 @@ class GradleDotEnvPluginFunctionalTest {
             println("UUID=${'$'}{env.UUID}")
             println("FOO=${'$'}{env.FOO}")
         """.trimIndent())
-
-        val envs = mapOf("FOO" to "BAR", "UUID" to UUID.randomUUID().toString())
 
         // Run the build
         val runner = GradleRunner.create()
