@@ -1,0 +1,31 @@
+name: "Test"
+# Only execute this workflow when a PR is opened or when something is pushed to the master branch
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        java-version: [11,16,17,21]
+    # Set up OS
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      # Setup java and maven
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: ${{ matrix.java-version }}
+          cache: 'gradle'
+      # Setup executable gradle
+      - name: Make Gradle executable
+        run: chmod +x gradlew
+      # Test plugin
+      - name: Test Plugin with Java ${{ matrix.java-version }}
+        run: ./gradlew test check --no-daemon
