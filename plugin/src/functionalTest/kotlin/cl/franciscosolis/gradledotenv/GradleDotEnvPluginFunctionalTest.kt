@@ -33,8 +33,8 @@ class GradleDotEnvPluginFunctionalTest {
                 id('cl.franciscosolis.gradledotenv')
             }
             
-            println("UUID=${'$'}{env.UUID}")
-            println("FOO=${'$'}{env.FOO}")
+            println("UUID=${'$'}{env["UUID"]}")
+            println("FOO=${'$'}{env["FOO"]}")
         """.trimIndent())
 
         // Run the build
