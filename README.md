@@ -1,9 +1,11 @@
 # Gradle Dot Env Plugin
+![Java Version](https://img.shields.io/badge/Java-11%2B-blue?logo=java)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Im-Fran/GradleDotEnv/test.yml?logo=github&label=Workflow+Status)
 ![GitHub](https://img.shields.io/github/license/Im-Fran/GradleDotEnv?label=License)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Im-Fran/GradleDotEnv?label=Release)
 
 A Gradle plugin to load environment variables from a .env file.
+> **WARNING:** This plugin is still in development, so it may not work as expected, make sure to report any issues you find.
 
 ## Installation
 ```kotlin
@@ -19,6 +21,12 @@ plugins {
     id 'cl.franciscosolis.gradledotenv' version '1.0.0'
 }
 ```
+
+Make sure to change the version by the current version:<br/>
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Im-Fran/GradleDotEnv?label=Release)
+
+You can also follow the [gradle plugin page instructions](https://plugins.gradle.org/plugin/cl.franciscosolis.gradledotenv#kotlin-usage).
+
 
 ## Usage
 The plugin adds a map called `env` to the project's `extra` property.

@@ -1,7 +1,6 @@
 plugins {
     `java-gradle-plugin`
     alias(libs.plugins.jvm)
-
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 
@@ -27,7 +26,7 @@ gradlePlugin {
         implementationClass = "cl.franciscosolis.gradledotenv.GradleDotEnvPlugin"
         displayName = "GradleDotEnv"
         description = "Gradle plugin to load environment variables from .env files"
-        version = "1.0.1"
+        version = project.version
         tags = listOf("env", "dotenv", "envfile", "environment", "variables")
     }
 }
@@ -45,10 +44,22 @@ val functionalTest by tasks.registering(Test::class) {
 
 gradlePlugin.testSourceSets.add(functionalTestSourceSet)
 
-tasks.named<Task>("check") {
-    dependsOn(functionalTest)
+tasks {
+    named<Task>("check") {
+        dependsOn(functionalTest)
+    }
+
+    named<Test>("test") {
+        useJUnitPlatform()
+    }
 }
 
-tasks.named<Test>("test") {
-    useJUnitPlatform()
+configure<JavaPluginExtension> {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    sourceSets {
+        getByName("main").java.srcDirs("src/main/kotlin")
+        getByName("test").java.srcDirs("src/test/kotlin")
+    }
 }
