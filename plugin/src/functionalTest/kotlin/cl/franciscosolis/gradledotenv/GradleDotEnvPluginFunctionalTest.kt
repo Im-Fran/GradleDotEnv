@@ -15,8 +15,8 @@ class GradleDotEnvPluginFunctionalTest {
     @field:TempDir
     lateinit var projectDir: File
 
-    private val buildFile by lazy { projectDir.resolve("build.gradle") }
-    private val settingsFile by lazy { projectDir.resolve("settings.gradle") }
+    private val buildFile by lazy { projectDir.resolve("build.gradle.kts") }
+    private val settingsFile by lazy { projectDir.resolve("settings.gradle.kts") }
     private val envFile by lazy { projectDir.resolve(".env") }
 
     @Test
@@ -30,11 +30,11 @@ class GradleDotEnvPluginFunctionalTest {
         settingsFile.writeText("")
         buildFile.writeText("""
             plugins {
-                id('cl.franciscosolis.gradledotenv')
+                id("cl.franciscosolis.gradledotenv")
             }
             
-            println("UUID=${'$'}{env.UUID}")
-            println("FOO=${'$'}{env.FOO}")
+            println("UUID=${'$'}{env["UUID"]}")
+            println("FOO=${'$'}{env["FOO"]}")
         """.trimIndent())
 
         // Run the build

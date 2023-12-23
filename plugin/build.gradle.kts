@@ -1,11 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `java-gradle-plugin`
     alias(libs.plugins.jvm)
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 
-version = "1.0.0"
+version = "1.0.1"
 group = "cl.franciscosolis"
+
+// Set up the publishing plugin
+if(System.getenv("GRADLE_PUBLISH_KEY") != null && System.getenv("GRADLE_PUBLISH_SECRET") != null) {
+    System.setProperty("gradle.publish.key", System.getenv("GRADLE_PUBLISH_KEY"))
+    System.setProperty("gradle.publish.secret", System.getenv("GRADLE_PUBLISH_SECRET"))
+}
 
 repositories {
     mavenLocal()
@@ -51,6 +59,12 @@ tasks {
 
     named<Test>("test") {
         useJUnitPlatform()
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
     }
 }
 
