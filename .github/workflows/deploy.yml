@@ -8,6 +8,7 @@ jobs:
     name: "Deploy Gradle Plugin"
     # Set up OS
     runs-on: ubuntu-latest
+    environment: "Gradle Plugin Portal"
     steps:
       # Checkout code
       - name: Checkout Code
