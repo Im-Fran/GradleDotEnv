@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `java-gradle-plugin`
     alias(libs.plugins.jvm)
@@ -51,6 +53,12 @@ tasks {
 
     named<Test>("test") {
         useJUnitPlatform()
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
     }
 }
 
